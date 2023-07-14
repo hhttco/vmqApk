@@ -142,7 +142,10 @@ public class NeNotificationService2  extends NotificationListenerService {
 
                 if (pkg.equals("com.eg.android.AlipayGphone")){
                     if (content!=null && !content.equals("")) {
-                        if (content.indexOf("通过扫码向你付款")!=-1 || content.indexOf("成功收款")!=-1){
+                        if (content.indexOf("通过扫码向你付款")!=-1 || content.indexOf("成功收款")!=-1 
+                                || title.contains("通过扫码向你付款") || title.contains("成功收款")
+                                || content.contains("店员通") || title.contains("店员通")
+                                || content.contains("二维码收款到账") || title.contains("二维码收款到账")){
                             String money = getMoney(content);
                             if (money!=null){
                                 Log.d(TAG, "onAccessibilityEvent: 匹配成功： 支付宝 到账 " + money);
@@ -162,7 +165,9 @@ public class NeNotificationService2  extends NotificationListenerService {
                 }else if(pkg.equals("com.tencent.mm")){
 
                     if (content!=null && !content.equals("")){
-                        if (title.equals("微信支付") || title.equals("微信收款助手") || title.equals("微信收款商业版")){
+                        if (title.equals("微信支付") || title.equals("微信收款助手") || title.equals("微信收款商业版")
+                                || (title.equals("对外收款") || title.equals("企业微信")) && 
+                                (content.contains("成功收款") || content.contains("收款通知"))){
                             String money = getMoney(content);
                             if (money!=null){
                                 Log.d(TAG, "onAccessibilityEvent: 匹配成功： 微信到账 "+ money);
